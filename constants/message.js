@@ -6,12 +6,6 @@ const APP_MESSAGES = {
     PASSWORD_REQUIRED: "Password is required",
     FIRST_NAME_IS_REQUIRED: "First name is required",
     LAST_NAME_IS_REQUIRED: "Last name is required",
-    FIRST_NAME_MUST_BE_STRING: "First name must be string",
-    LAST_NAME_MUST_BE_STRING: "Last name must be string",
-    USERNAME_MUST_BE_STRING: "Username must be string",
-    LOCATION_MUST_BE_STRING: "Location must be string",
-    DESCRIPTION_MUST_BE_STRING: "Description must be string",
-    OCCUPATION_MUST_BE_STRING: "Occupation must be string",
     PASSWORD_MUST_HAVE_MINIMUM_6_CHARACTERS_ONE_LOWERCASE_ONE_UPPERCASE_ONE_NUMBER_ONE_SYMBOL:
       "Password must have minimum 6 characters, one lowercase, one uppercase, one number and one symbol",
     CONFIRM_PASSWORD_REQUIRED: "Confirm password is required",
@@ -21,6 +15,8 @@ const APP_MESSAGES = {
     ACCESS_TOKEN_IS_REQUIRED: "Access token is required",
     REFRESH_TOKEN_IS_REQUIRED: "Refresh token is required",
     REFRESH_TOKEN_NOT_FOUND_OR_USED: "Refresh token not found or used",
+    FILE_NAME_REQUIRED: "File name is required",
+    COMMENT_REQUIRED: "Comment is required",
   };
   
   module.exports = { APP_MESSAGES };

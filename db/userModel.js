@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     location: { type: String },
     occupation: { type: String },
 },
-    { versionKey: false });
+{ versionKey: false });
 
 const User = mongoose.model.Users || mongoose.model("Users", userSchema);
 module.exports = User;
