@@ -15,12 +15,12 @@ const userSchema = new mongoose.Schema({
     },
     first_name: {
         type: String,
-        required: [true, APP_MESSAGES.FIRST_NAME_REQUIRED],
+        required: [true, APP_MESSAGES.FIRST_NAME_IS_REQUIRED],
         trim: true
     },
     last_name: {
         type: String,
-        required: [true, APP_MESSAGES.LAST_NAME_REQUIRED],
+        required: [true, APP_MESSAGES.LAST_NAME_IS_REQUIRED],
         trim: true
     },
     location: { type: String },

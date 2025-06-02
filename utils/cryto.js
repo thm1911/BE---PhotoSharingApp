@@ -6,4 +6,12 @@ const sha256 = (data) => {
 
 const hashPassword = (password) => sha256(password);
 
-module.exports = { hashPassword };
+const comparePassword = (password, hashedPassword) => {
+  const hashedInput = sha256(password);
+  return hashedInput === hashedPassword;
+};
+
+module.exports = {
+  hashPassword,
+  comparePassword
+};
