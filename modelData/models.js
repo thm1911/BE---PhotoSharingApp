@@ -365,6 +365,10 @@ const userModel = function (userId) {
   return null;
 };
 
+const photoModel = function () {
+  return photos;
+};
+
 const photoOfUserModel = function (userId) {
   return photos.filter(function (photo) {
     return photo.user_id === userId;
@@ -378,6 +382,7 @@ const schemaModel = function () {
 const models = {
   userListModel: userListModel,
   userModel: userModel,
+  photoModel: photoModel,
   photoOfUserModel: photoOfUserModel,
   schemaInfo: schemaModel,
 };
