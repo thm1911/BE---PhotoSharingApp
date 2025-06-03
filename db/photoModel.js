@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { APP_MESSAGES } = require("../constants/message");
+const User = require("./userModel");
 
 const commentSchema = new mongoose.Schema({
     comment: {
@@ -7,7 +8,9 @@ const commentSchema = new mongoose.Schema({
         required: [true, APP_MESSAGES.COMMENT_REQUIRED]
     },
     date_time: { type: Date, default: Date.now() },
-    user_id: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
+    user: {
+        type: Object
+    },
     photo_id: { type: mongoose.Schema.Types.ObjectId, ref: "Photos" },
 });
 

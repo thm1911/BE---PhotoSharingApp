@@ -7,16 +7,14 @@ const { uploadSingle } = require("../middleware/uploadFile");
 
 router.get("/list", verifyToken, async (req, res) => {
     try {
-        const photos = await Photo.find({}).populate({
-            path: "comments.user_id",
-            model: "Users",
-        });
+        const photos = await Photo.find({})
 
         const transformPhotos = photos.map((photo) => {
             const transformComments = photo.comments.map((comment) => {
                 return {
                     _id: comment._id,
-                    user_id: comment.user_id,
+                    photo_id: comment.photo_id,
+                    user: comment.user,
                     comment: comment.comment,
                 }
             });
@@ -24,6 +22,7 @@ router.get("/list", verifyToken, async (req, res) => {
                 _id: photo._id,
                 user_id: photo.user_id,
                 file_name: photo.file_name,
+                file_path: photo.file_path,
                 description: photo.description,
                 date_time: photo.date_time,
                 comments: transformComments,
@@ -44,15 +43,13 @@ router.get("/list", verifyToken, async (req, res) => {
 
 router.get("/:id", verifyToken, async (req, res) => {
     try {
-        const photos = await Photo.find({ user_id: req.params.id }).populate({
-            path: "comments.user_id",
-            model: "Users",
-        });
+        const photos = await Photo.find({ user_id: req.params.id })
         const transformPhotos = photos.map((photo) => {
             const transformComments = photo.comments.map((comment) => {
                 return {
                     _id: comment._id,
-                    user_id: comment.user_id,
+                    photo_id: comment.photo_id,
+                    user: comment.user,
                     comment: comment.comment,
                 }
             });
@@ -60,6 +57,7 @@ router.get("/:id", verifyToken, async (req, res) => {
                 _id: photo._id,
                 user_id: photo.user_id,
                 file_name: photo.file_name,
+                file_path: photo.file_path,
                 description: photo.description,
                 date_time: photo.date_time,
                 comments: transformComments,
@@ -80,12 +78,11 @@ router.get("/:id", verifyToken, async (req, res) => {
 
 router.post("/upload", verifyToken, uploadSingle, async (req, res) => {
     try {
-        console.log("req.file.path", req.file.path);
-        const img = fs.readFileSync(req.file.path);
+        const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
         const newPhoto = new Photo({
             file_name: req.file.filename,
-            file_path: req.file.path,
-            user_id: req.user._id,
+            file_path: fileUrl,
+            user_id: req.body.user_id,
             description: req.body.description,
         })
         await newPhoto.save();

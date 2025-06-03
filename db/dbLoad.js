@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const { hashPassword } = require("../utils/cryto");
 const models = require("../modelData/models");
-const User = require("../db/userModel");
-const { Photo } = require("../db/photoModel");
-const { Comment } = require("../db/photoModel");
+const User = require("./userModel");
+const { Photo } = require("./photoModel");
+const { Comment } = require("./photoModel");
 
 
 async function dbLoad() {
@@ -68,7 +68,7 @@ async function dbLoad() {
           let commentObj = new Comment({
             comment: comment.comment,
             date_time: comment.date_time,
-            user_id: mapFakeId2RealId[comment.user_id],
+            user: comment.user,
             photo_id: photoObj._id,
           });
 

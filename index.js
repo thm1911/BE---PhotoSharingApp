@@ -17,12 +17,12 @@ const port = 8080;
 // dbLoad();
 dbConnect();
 app.use(cors());
+app.use(express.json({ limit: "50mb" }));
 app.use("/admin", AuthRouter);
 app.use("/api/user", UserRouter);
 app.use("/api/photosOfUser", PhotoRouter);
-app.use(express.json({ limit: "50mb" }));
 app.use("/api/commentsOfUser", CommentRouter);
-
+app.use("/uploads", express.static("uploads"));
 app.listen(port, () => {
   console.log(`Sandbox listening on port ${port}`);
 });
