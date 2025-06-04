@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema({
     },
     location: { type: String },
     occupation: { type: String },
+    description: { type: String },
 },
 { versionKey: false });
 

@@ -16,6 +16,7 @@ router.get("/list", verifyToken, async (req, res) => {
                     photo_id: comment.photo_id,
                     user: comment.user,
                     comment: comment.comment,
+                    date_time: comment.date_time,
                 }
             });
             return {
@@ -66,6 +67,7 @@ router.get("/:userId", verifyToken, async (req, res) => {
                     photo_id: comment.photo_id,
                     user: comment.user,
                     comment: comment.comment,
+                    date_time: comment.date_time,
                 }
             });
             return {
