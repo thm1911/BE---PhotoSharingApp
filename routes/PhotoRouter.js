@@ -41,9 +41,24 @@ router.get("/list", verifyToken, async (req, res) => {
     }
 });
 
-router.get("/:id", verifyToken, async (req, res) => {
+router.get("/photo/:photoId", verifyToken, async (req, res) => {
     try {
-        const photos = await Photo.find({ user_id: req.params.id })
+        const photo = await Photo.findById(req.params.photoId)
+        res.status(200).json({
+            success: true,
+            data: photo,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+})
+
+router.get("/:userId", verifyToken, async (req, res) => {
+    try {
+        const photos = await Photo.find({ user_id: req.params.userId })
         const transformPhotos = photos.map((photo) => {
             const transformComments = photo.comments.map((comment) => {
                 return {
@@ -94,7 +109,7 @@ router.post("/upload", verifyToken, uploadSingle, async (req, res) => {
         console.log("❌ Error upload photo:", error);
         res.status(500).json({
             success: false,
-            message: error.message,
+            message: "Error upload photo",
         });
     }
 });
