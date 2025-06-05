@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { verifyToken } = require("../middleware/auth");
-const { Photo } = require("../db/photoModel");
+const { Photo, Comment } = require("../db/photoModel");
 const fs = require("fs");
 const { uploadSingle } = require("../middleware/uploadFile");
 
@@ -116,4 +116,20 @@ router.post("/upload", verifyToken, uploadSingle, async (req, res) => {
     }
 });
 
+router.delete("/:photoId", verifyToken, async (req, res) => {
+    try {
+        await Comment.deleteMany({ photo_id: req.params.photoId })
+        await Photo.findByIdAndDelete(req.params.photoId);
+        
+        res.status(200).json({
+            success: true,
+            message: "Photo deleted successfully",  
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error delete photo",
+        });
+    }
+});
 module.exports = router;
